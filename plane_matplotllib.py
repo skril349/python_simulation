@@ -22,3 +22,16 @@ altutide = 2
 #np.ones create an array with t array length
 y = np.ones(len(t))*altitude
 print(y)
+
+################ANIMATION##################
+
+#frame quantity
+frame_amount = len(t)
+#function update_plot
+def update_plot(num):
+    
+    return
+
+plane_ani = animation.FuncAnimation(fig,update_plot,frames=frame_amount, interval=20,repeat=True,blit=True)
+
+plt.show()
