@@ -31,7 +31,19 @@ frame_amount = len(t)
 def update_plot(num):
     
     return
+#figsize is screen 16*9
+#dpi = resolution
+#facecolor = color of the figure in RGB
+fig = plt.figure(figsize=(16.9),dpi=120,facecolor(0.8,0.8,0.8))
+#how we will divide the screen
+# 2,2 = __|__
+#         |
+gs = gridspec.GridSpec(2,2)
 
+# Subplot 1
+ax0 = fig.add_subplot(gs[0,:], facecolor(0.9,0.9,0.9))
+
+# Animation Function
 plane_ani = animation.FuncAnimation(fig,update_plot,frames=frame_amount, interval=20,repeat=True,blit=True)
 
 plt.show()
