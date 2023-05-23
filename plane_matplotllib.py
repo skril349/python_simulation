@@ -18,7 +18,7 @@ x = 800*t
 #as we can see, t is an array and we multiply every value with 800
 print(x)
 #set up y array
-altutide = 2
+altitude = 2
 #np.ones create an array with t array length
 y = np.ones(len(t))*altitude
 print(y)
@@ -29,20 +29,23 @@ print(y)
 frame_amount = len(t)
 #function update_plot
 def update_plot(num):
-    
-    return
+
+    plane_trajectory.set_data(x[0:num],y[0:num])
+
+    return plane_trajectory,
 #figsize is screen 16*9
 #dpi = resolution
 #facecolor = color of the figure in RGB
-fig = plt.figure(figsize=(16.9),dpi=120,facecolor(0.8,0.8,0.8))
+fig = plt.figure(figsize=(16,9),dpi=120,facecolor=(0.8,0.8,0.8))
 #how we will divide the screen
 # 2,2 = __|__
 #         |
 gs = gridspec.GridSpec(2,2)
 
 # Subplot 1
-ax0 = fig.add_subplot(gs[0,:], facecolor(0.9,0.9,0.9))
-
+ax0 = fig.add_subplot(gs[0,:], facecolor=(0.9,0.9,0.9))
+#la coma es per donar la info dins dels []
+plane_trajectory, = ax0.plot([],[],'g',linewidth=2)
 # Animation Function
 plane_ani = animation.FuncAnimation(fig,update_plot,frames=frame_amount, interval=20,repeat=True,blit=True)
 
