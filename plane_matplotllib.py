@@ -46,6 +46,10 @@ gs = gridspec.GridSpec(2,2)
 ax0 = fig.add_subplot(gs[0,:], facecolor=(0.9,0.9,0.9))
 #la coma es per donar la info dins dels []
 plane_trajectory, = ax0.plot([],[],'g',linewidth=2)
+
+#adding axis limits
+plt.xlim(x[0], x[-1])
+plt.ylim(y[0], y[-1])
 # Animation Function
 plane_ani = animation.FuncAnimation(fig,update_plot,frames=frame_amount, interval=20,repeat=True,blit=True)
 
