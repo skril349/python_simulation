@@ -21,7 +21,6 @@ print(x)
 altitude = 2
 #np.ones create an array with t array length
 y = np.ones(len(t))*altitude
-print(y)
 
 ################ANIMATION##################
 
@@ -62,15 +61,18 @@ plane_5,=ax0.plot([],[],'k',linewidth=3)
 
 
 #draw houses
-house_1, = ax0.plot([100,100],[0,1.0],'k',linewidth=4)
-house_2, = ax0.plot([300,300],[0,1.0],'k',linewidth=4)
-house_3, = ax0.plot([900,900],[0,1.5],'k',linewidth=4)
+house_1, = ax0.plot([100,100],[0,1.0],'k',linewidth=8)
+house_2, = ax0.plot([300,300],[0,1.0],'k',linewidth=10)
+house_3, = ax0.plot([900,900],[0,1.5],'k',linewidth=6)
 house_4, = ax0.plot([1300,1300],[0,0.9],'k',linewidth=4)
 
 
 #adding axis limits
 plt.xlim(x[0], x[-1])
 plt.ylim(0, y[-1]+1)
+plt.xticks(np.arange(x[0],x[-1]+1,x[-1]/4),size=15)
+plt.yticks(np.arange(0,y[-1]+2,y[-1]/y[-1]),size=15)
+
 
 # Animation Function
 plane_ani = animation.FuncAnimation(fig,update_plot,frames=frame_amount, interval=20,repeat=True,blit=True)
