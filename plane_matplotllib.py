@@ -70,9 +70,14 @@ house_4, = ax0.plot([1300,1300],[0,0.9],'k',linewidth=4)
 #adding axis limits
 plt.xlim(x[0], x[-1])
 plt.ylim(0, y[-1]+1)
+#adding ticks
 plt.xticks(np.arange(x[0],x[-1]+1,x[-1]/4),size=15)
 plt.yticks(np.arange(0,y[-1]+2,y[-1]/y[-1]),size=15)
-
+#adding labels
+plt.xlabel('x-distance (km)',fontsize=15)
+plt.ylabel('y-distance (km)',fontsize=15)
+plt.title('Airplane', fontsize=20)
+plt.grid(True)
 
 # Animation Function
 plane_ani = animation.FuncAnimation(fig,update_plot,frames=frame_amount, interval=20,repeat=True,blit=True)
