@@ -31,8 +31,9 @@ frame_amount = len(t)
 def update_plot(num):
 
     plane_trajectory.set_data(x[0:num],y[0:num])
+    plane_trajectory1.set_data(x[0:num],y[0:num])
 
-    return plane_trajectory,
+    return plane_trajectory, plane_trajectory1,
 #figsize is screen 16*9
 #dpi = resolution
 #facecolor = color of the figure in RGB
@@ -46,10 +47,16 @@ gs = gridspec.GridSpec(2,2)
 ax0 = fig.add_subplot(gs[0,:], facecolor=(0.9,0.9,0.9))
 #la coma es per donar la info dins dels []
 plane_trajectory, = ax0.plot([],[],'g',linewidth=2)
-
 #adding axis limits
 plt.xlim(x[0], x[-1])
-plt.ylim(y[0], y[-1])
+plt.ylim(0, y[-1]+1)
+
+#subplot 2
+ax1 = fig.add_subplot(gs[1,0], facecolor=(0.5,0.5,0.5))
+plane_trajectory1, = ax1.plot([],[],'r',linewidth=8)
+plt.xlim(x[0], x[-1])
+plt.ylim(0, y[-1]+1)
+
 # Animation Function
 plane_ani = animation.FuncAnimation(fig,update_plot,frames=frame_amount, interval=20,repeat=True,blit=True)
 
