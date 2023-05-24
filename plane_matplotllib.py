@@ -31,11 +31,12 @@ frame_amount = len(t)
 def update_plot(num):
 
     plane_trajectory.set_data(x[0:num],y[0:num])
-    plane_1.set_data([x[num],x[num+10]],[2,2])
-    
+    plane_1.set_data([x[num-10],x[num]],[2,2])
+    ala_1.set_data([x[num-7],x[num-3]],[2.3,2])
+    ala_2.set_data([x[num-7],x[num-3]],[1.7,2])
 
-    return plane_trajectory,plane_1
-    
+    return plane_trajectory,plane_1,ala_1, ala_2
+
 #figsize is screen 16*9
 #dpi = resolution
 #facecolor = color of the figure in RGB
@@ -52,6 +53,16 @@ plane_trajectory, = ax0.plot([],[],'g',linewidth=2)
 
 #plane design
 plane_1, = ax0.plot([],[],'k',linewidth=6)
+ala_1, = ax0.plot([],[],'k',linewidth=4)
+ala_2, = ax0.plot([],[],'k',linewidth=4)
+
+#draw houses
+house_1, = ax0.plot([100,100],[0,1.0],'k',linewidth=4)
+house_2, = ax0.plot([300,300],[0,1.0],'k',linewidth=4)
+house_3, = ax0.plot([900,900],[0,1.5],'k',linewidth=4)
+house_4, = ax0.plot([1300,1300],[0,0.9],'k',linewidth=4)
+
+
 #adding axis limits
 plt.xlim(x[0], x[-1])
 plt.ylim(0, y[-1]+1)
