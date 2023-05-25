@@ -12,6 +12,7 @@ dt = 0.005
 #create array for time
 
 t = np.arange(t0,t_end+dt,dt)
+
 print(t)
 #set up X array
 x = 800*t
@@ -26,17 +27,33 @@ y = np.ones(len(t))*altitude
 
 #frame quantity
 frame_amount = len(t)
+dot = np.zeros(frame_amount)
+n=20;
+
+for i in range(0,frame_amount):
+    if(i == n):
+        dot[i] = x[i]
+        n=n+20
+    else:
+        dot[i] = x[n-20]
+
+print(dot)        
 #function update_plot
 def update_plot(num):
 
-    plane_trajectory.set_data(x[0:num],y[0:num])
+    plane_trajectory.set_data(dot[0:num],y[0:num])
+
     plane_1.set_data([x[num]-40,x[num]+20],[y[num],y[num]])
     plane_2.set_data([x[num]-20,x[num]],[y[num]+0.3,y[num]])
     plane_3.set_data([x[num]-20,x[num]],[y[num]-0.3,y[num]])
     plane_4.set_data([x[num]-40,x[num]-30],[y[num]+0.15,y[num]])
     plane_5.set_data([x[num]-40,x[num]-30],[y[num]-0.15,y[num]])
 
-    return plane_trajectory,plane_1,plane_2,plane_3,plane_4,plane_5,
+    stopwatch0.set_text(str(round(t[num],1))+'hrs')
+    stopwatch1.set_text(str(round(x[num],1))+'km')
+
+    return plane_trajectory,plane_1,plane_2,plane_3,plane_4,plane_5,\
+    stopwatch0,stopwatch1,
 
 #figsize is screen 16*9
 #dpi = resolution
@@ -50,7 +67,8 @@ gs = gridspec.GridSpec(2,2)
 # Subplot 1
 ax0 = fig.add_subplot(gs[0,:], facecolor=(0.9,0.9,0.9))
 #la coma es per donar la info dins dels []
-plane_trajectory, = ax0.plot([],[],'g',linewidth=2)
+#r:o vol dir que faci la línea vermella amb punts
+plane_trajectory, = ax0.plot([],[],'r:o',linewidth=2)
 
 #plane design
 plane_1,=ax0.plot([],[],'k',linewidth=10)
@@ -79,6 +97,12 @@ plt.ylabel('y-distance (km)',fontsize=15)
 plt.title('Airplane', fontsize=20)
 plt.grid(True)
 
+#adding text
+box_object = dict(boxstyle="square", fc=(0.9,0.9,0.9),ec='r',lw=1)
+box_object2 = dict(boxstyle="square", fc=(0.9,0.9,0.9),ec='g',lw=1)
+
+stopwatch0 = ax0.text(1400,0.70,'', size=20,color='r',bbox=box_object);
+stopwatch1 = ax0.text(1400,0.15,'', size=20,color='g',bbox=box_object2);
 # Animation Function
 plane_ani = animation.FuncAnimation(fig,update_plot,frames=frame_amount, interval=20,repeat=True,blit=True)
 
