@@ -43,6 +43,7 @@ def update_plot(num):
 
     #plot1
     plane_trajectory.set_data(dot[0:num],y[0:num])
+    vertical_plane.set_data([x[num],x[num]],[0,altitude])
 
     #plane design movement
     plane_1.set_data([x[num]-40,x[num]+20],[y[num],y[num]])
@@ -55,12 +56,13 @@ def update_plot(num):
     stopwatch1.set_text(str(round(x[num],1))+'km')
 
     #plot2
+    #line.set_data([xi,xf],[yi,yf])
     x_dist.set_data(t[0:num],x[0:num])
     horizontal.set_data([t[0],t[num]],[x[num],x[num]])
     vertical.set_data([t[num],t[num]],[x[0],x[num]])
 
     return plane_trajectory,plane_1,plane_2,plane_3,plane_4,plane_5,\
-    stopwatch0,stopwatch1,x_dist,horizontal,vertical,
+    stopwatch0,stopwatch1,x_dist,horizontal,vertical,vertical_plane,
 
 #figsize is screen 16*9
 #dpi = resolution
@@ -76,6 +78,7 @@ ax0 = fig.add_subplot(gs[0,:], facecolor=(0.9,0.9,0.9))
 #la coma es per donar la info dins dels []
 #r:o vol dir que faci la línea vermella amb punts
 plane_trajectory, = ax0.plot([],[],'r:o',linewidth=2)
+vertical_plane, = ax0.plot([],[],'k:o',linewidth=2)
 
 #plane design
 plane_1,=ax0.plot([],[],'k',linewidth=10)
