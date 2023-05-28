@@ -34,15 +34,17 @@ for i in range(0,frame_amount):
     if(i == n):
         dot[i] = x[i]
         n=n+20
-    else:
+    else: 
         dot[i] = x[n-20]
 
 print(dot)        
 #function update_plot
 def update_plot(num):
 
+    #plot1
     plane_trajectory.set_data(dot[0:num],y[0:num])
 
+    #plane design movement
     plane_1.set_data([x[num]-40,x[num]+20],[y[num],y[num]])
     plane_2.set_data([x[num]-20,x[num]],[y[num]+0.3,y[num]])
     plane_3.set_data([x[num]-20,x[num]],[y[num]-0.3,y[num]])
@@ -52,8 +54,13 @@ def update_plot(num):
     stopwatch0.set_text(str(round(t[num],1))+'hrs')
     stopwatch1.set_text(str(round(x[num],1))+'km')
 
+    #plot2
+    x_dist.set_data(t[0:num],x[0:num])
+    x_dist_red.set_data(t[0:num],x[0:num])
+
+
     return plane_trajectory,plane_1,plane_2,plane_3,plane_4,plane_5,\
-    stopwatch0,stopwatch1,
+    stopwatch0,stopwatch1,x_dist,x_dist_red
 
 #figsize is screen 16*9
 #dpi = resolution
@@ -97,6 +104,22 @@ plt.ylabel('y-distance (km)',fontsize=15)
 plt.title('Airplane', fontsize=20)
 plt.grid(True)
 
+
+#subplot 2
+
+ax1 = fig.add_subplot(gs[1,0], facecolor=(0.9,0.9,0.9))
+horizontal, = ax1.plot([],[],'r:o',linewidth=2)
+
+x_dist, = ax1.plot([],[],'b',linewidth=3, label="X=800t")
+plt.xlim(t[0], t[-1])
+plt.ylim(x[0], x[-1])
+plt.xticks(np.arange(t[0],t[-1]+dt,t[-1]/4))
+plt.yticks(np.arange(x[0],x[-1]+1,x[-1]))
+plt.ylabel('x-distance (km)',fontsize=15)
+plt.xlabel('time (hrs)',fontsize=15)
+plt.title('x-t', fontsize=20)
+plt.legend(loc="upper left",fontsize="x-large")
+plt.grid(True)
 #adding text
 box_object = dict(boxstyle="square", fc=(0.9,0.9,0.9),ec='r',lw=1)
 box_object2 = dict(boxstyle="square", fc=(0.9,0.9,0.9),ec='g',lw=1)
