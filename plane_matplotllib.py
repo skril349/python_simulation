@@ -56,11 +56,11 @@ def update_plot(num):
 
     #plot2
     x_dist.set_data(t[0:num],x[0:num])
-    x_dist_red.set_data(t[0:num],x[0:num])
-
+    horizontal.set_data([t[0],t[num]],[x[num],x[num]])
+    vertical.set_data([t[num],t[num]],[x[0],x[num]])
 
     return plane_trajectory,plane_1,plane_2,plane_3,plane_4,plane_5,\
-    stopwatch0,stopwatch1,x_dist,x_dist_red
+    stopwatch0,stopwatch1,x_dist,horizontal,vertical,
 
 #figsize is screen 16*9
 #dpi = resolution
@@ -108,8 +108,8 @@ plt.grid(True)
 #subplot 2
 
 ax1 = fig.add_subplot(gs[1,0], facecolor=(0.9,0.9,0.9))
-horizontal, = ax1.plot([],[],'r:o',linewidth=2)
-
+horizontal, = ax1.plot([],[],'r:o',linewidth=2, label="horizontal Line")
+vertical, = ax1.plot([],[],'g:o',linewidth=2, label="vertical Line")
 x_dist, = ax1.plot([],[],'b',linewidth=3, label="X=800t")
 plt.xlim(t[0], t[-1])
 plt.ylim(x[0], x[-1])
