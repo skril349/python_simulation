@@ -44,7 +44,8 @@ def update_plot(num):
     #plot1
     plane_trajectory.set_data(dot[0:num],y[0:num])
     vertical_plane.set_data([x[num],x[num]],[0,altitude])
-
+    velocity.set_data(t[0:num],x[num]/t[num])
+    verticalvelocity.set_data([t[num],t[num]],[0,x[num]/t[num]])
     #plane design movement
     plane_1.set_data([x[num]-40,x[num]+20],[y[num],y[num]])
     plane_2.set_data([x[num]-20,x[num]],[y[num]+0.3,y[num]])
@@ -62,7 +63,7 @@ def update_plot(num):
     vertical.set_data([t[num],t[num]],[x[0],x[num]])
 
     return plane_trajectory,plane_1,plane_2,plane_3,plane_4,plane_5,\
-    stopwatch0,stopwatch1,x_dist,horizontal,vertical,vertical_plane,
+    stopwatch0,stopwatch1,x_dist,horizontal,vertical,vertical_plane,velocity,verticalvelocity,
 
 #figsize is screen 16*9
 #dpi = resolution
@@ -117,7 +118,7 @@ x_dist, = ax1.plot([],[],'b',linewidth=3, label="X=800t")
 plt.xlim(t[0], t[-1])
 plt.ylim(x[0], x[-1])
 plt.xticks(np.arange(t[0],t[-1]+dt,t[-1]/4))
-plt.yticks(np.arange(x[0],x[-1]+1,x[-1]))
+plt.yticks(np.arange(x[0],x[-1]+1,200))
 plt.ylabel('x-distance (km)',fontsize=15)
 plt.xlabel('time (hrs)',fontsize=15)
 plt.title('x-t', fontsize=20)
@@ -126,6 +127,21 @@ plt.grid(True)
 #adding text
 box_object = dict(boxstyle="square", fc=(0.9,0.9,0.9),ec='r',lw=1)
 box_object2 = dict(boxstyle="square", fc=(0.9,0.9,0.9),ec='g',lw=1)
+
+#subplot 3
+ax2 = fig.add_subplot(gs[1,1], facecolor=(0.9,0.9,0.9))
+velocity, = ax2.plot([],[],'b',linewidth=3, label="X=Dx/Dt")
+verticalvelocity, = ax2.plot([],[],'b:o',linewidth=2, label="vertical Line")
+plt.xlim(t[0], t[-1])
+plt.ylim(x[0], x[-1])
+plt.xticks(np.arange(t[0],t[-1]+dt,t[-1]/4))
+plt.yticks(np.arange(x[0],x[-1]+1,200))
+plt.ylabel('speed (km/hr)',fontsize=15)
+plt.xlabel('time (hrs)',fontsize=15)
+plt.title('speed as function of time', fontsize=20)
+plt.legend(loc="upper right",fontsize="x-large")
+
+plt.grid(True)
 
 stopwatch0 = ax0.text(1400,0.70,'', size=20,color='r',bbox=box_object);
 stopwatch1 = ax0.text(1400,0.15,'', size=20,color='g',bbox=box_object2);
