@@ -56,6 +56,9 @@ def update_plot(num):
     stopwatch0.set_text(str(round(t[num],1))+'hrs')
     stopwatch1.set_text(str(round(x[num],1))+'km')
 
+    numerator.set_text(str(round(x[num],1)))
+    denominator.set_text(str(round(t[num],1)))
+    division_speed.set_text(" = "+ str(round(x[num]/t[num],1))+ "km/h")
     #plot2
     #line.set_data([xi,xf],[yi,yf])
     x_dist.set_data(t[0:num],x[0:num])
@@ -63,7 +66,8 @@ def update_plot(num):
     vertical.set_data([t[num],t[num]],[x[0],x[num]])
 
     return plane_trajectory,plane_1,plane_2,plane_3,plane_4,plane_5,\
-    stopwatch0,stopwatch1,x_dist,horizontal,vertical,vertical_plane,velocity,verticalvelocity,
+    stopwatch0,stopwatch1,x_dist,horizontal,vertical,vertical_plane,velocity,verticalvelocity,\
+    numerator,denominator,division_speed,
 
 #figsize is screen 16*9
 #dpi = resolution
@@ -80,6 +84,12 @@ ax0 = fig.add_subplot(gs[0,:], facecolor=(0.9,0.9,0.9))
 #r:o vol dir que faci la línea vermella amb punts
 plane_trajectory, = ax0.plot([],[],'r:o',linewidth=2)
 vertical_plane, = ax0.plot([],[],'k:o',linewidth=2)
+#adding text
+box_object = dict(boxstyle="square", fc=(0.9,0.9,0.9),ec='r',lw=1)
+box_object2 = dict(boxstyle="square", fc=(0.9,0.9,0.9),ec='g',lw=1)
+
+stopwatch0 = ax0.text(1400,0.70,'', size=20,color='r',bbox=box_object);
+stopwatch1 = ax0.text(1400,0.15,'', size=20,color='g',bbox=box_object2);
 
 #plane design
 plane_1,=ax0.plot([],[],'k',linewidth=10)
@@ -124,14 +134,16 @@ plt.xlabel('time (hrs)',fontsize=15)
 plt.title('x-t', fontsize=20)
 plt.legend(loc="upper left",fontsize="x-large")
 plt.grid(True)
-#adding text
-box_object = dict(boxstyle="square", fc=(0.9,0.9,0.9),ec='r',lw=1)
-box_object2 = dict(boxstyle="square", fc=(0.9,0.9,0.9),ec='g',lw=1)
 
 #subplot 3
 ax2 = fig.add_subplot(gs[1,1], facecolor=(0.9,0.9,0.9))
 velocity, = ax2.plot([],[],'b',linewidth=3, label="X=Dx/Dt")
 verticalvelocity, = ax2.plot([],[],'b:o',linewidth=2, label="vertical Line")
+divisionLine, = ax2.plot([0.1,0.35],[995,995],'k',linewidth=1)
+numerator = ax2.text(0.1,1015,'', size=20,color='r');
+denominator = ax2.text(0.1,865,'', size=20,color='g');
+division_speed = ax2.text(0.4,950,'', size=20,color='b');
+
 plt.xlim(t[0], t[-1])
 plt.ylim(x[0], x[-1])
 plt.xticks(np.arange(t[0],t[-1]+dt,t[-1]/4))
@@ -143,8 +155,7 @@ plt.legend(loc="upper right",fontsize="x-large")
 
 plt.grid(True)
 
-stopwatch0 = ax0.text(1400,0.70,'', size=20,color='r',bbox=box_object);
-stopwatch1 = ax0.text(1400,0.15,'', size=20,color='g',bbox=box_object2);
+
 # Animation Function
 plane_ani = animation.FuncAnimation(fig,update_plot,frames=frame_amount, interval=20,repeat=True,blit=True)
 
