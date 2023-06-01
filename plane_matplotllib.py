@@ -15,7 +15,9 @@ t = np.arange(t0,t_end+dt,dt)
 
 print(t)
 #set up X array
-x = 800*t
+a = 400
+n = 2
+x = 400*t*t
 #as we can see, t is an array and we multiply every value with 800
 print(x)
 #set up y array
