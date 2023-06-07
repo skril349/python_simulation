@@ -50,7 +50,8 @@ dy = 10 # [m]
 
 def update_plot(num):
 
-    sphere_Earth.set_data(sphere_x_Earth,sphere_y_Earth+y_Earth[num])
+    if y_Earth[num]>=radius:
+        sphere_Earth.set_data(sphere_x_Earth,sphere_y_Earth+y_Earth[num])
 
 
     return sphere_Earth,
