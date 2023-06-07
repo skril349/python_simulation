@@ -91,7 +91,7 @@ def update_plot(num):
         alt_E.set_data(t[0:num],y_Earth[0:num])
         Vel_E.set_data(t[0:num],y_Earth_Velocity[0:num])
         Acc_E.set_data(t[0:num],y_Earth_Acceleration[0:num])
-
+    
     if y_Mars[num]>=radius:
         sphere_Mars.set_data(sphere_x_Mars,sphere_y_Mars+y_Mars[num])
         alt_Mars.set_data(t[0:num],y_Mars[0:num])
@@ -127,7 +127,7 @@ plt.title("Earth")
 ################ MARS FIGURE #############################
 ax1 = fig.add_subplot(gs[:,1], facecolor=(0.9,0.9,0.9))
 sphere_Mars, = ax1.plot ([],[],'k',linewidth=3)
-land_Mars = ax1.plot([-radius*width_ratio,radius*width_ratio],[-5,-5], linewidth=38)
+land_Mars = ax1.plot([-radius*width_ratio,radius*width_ratio],[-5,-5],"orangered", linewidth=38)
 
 plt.xlim(-radius*width_ratio, radius*width_ratio)
 plt.ylim(y_f,y_i+dy)
@@ -138,7 +138,7 @@ plt.title("Mars")
 ################ MOON FIGURE #############################
 ax2 = fig.add_subplot(gs[:,2], facecolor=(0.9,0.9,0.9))
 sphere_Moon, = ax2.plot ([],[],'k',linewidth=3)
-land_Moon = ax2.plot([-radius*width_ratio,radius*width_ratio],[-5,-5], linewidth=38)
+land_Moon = ax2.plot([-radius*width_ratio,radius*width_ratio],[-5,-5],"gray", linewidth=38)
 
 plt.xlim(-radius*width_ratio, radius*width_ratio)
 plt.ylim(y_f,y_i+dy)
@@ -149,8 +149,8 @@ plt.title("Moon")
 ################# position ################3
 ax3 = fig.add_subplot(gs[0,3],facecolor=(0.9,0.9,0.9))
 alt_E,=ax3.plot([],[],'',linewidth=3,label='Alt_Earth = '+str(y_i)+' + ('+str(round(g_Earth/2,1))+')t^'+str(n)+' [m]')
-alt_M,=ax3.plot([],[],'',linewidth=3,label='Alt_Moon = '+str(y_i)+' + ('+str(round(g_Moon/2,1))+')t^'+str(n)+' [m]')
-alt_Mars,=ax3.plot([],[],'',linewidth=3,label='Alt_Mars = '+str(y_i)+' + ('+str(round(g_Mars/2,1))+')t^'+str(n)+' [m]')
+alt_M,=ax3.plot([],[],'orangered',linewidth=3,label='Alt_Moon = '+str(y_i)+' + ('+str(round(g_Moon/2,1))+')t^'+str(n)+' [m]')
+alt_Mars,=ax3.plot([],[],'gray',linewidth=3,label='Alt_Mars = '+str(y_i)+' + ('+str(round(g_Mars/2,1))+')t^'+str(n)+' [m]')
 
 plt.xlim(0,t_end)
 plt.ylim(0,y_i)
@@ -159,8 +159,8 @@ plt.legend(loc=(0.6,0.7),fontsize='x-small')
 ################ velocity #############
 ax4 = fig.add_subplot(gs[1,3],facecolor=(0.9,0.9,0.9))
 Vel_E,=ax4.plot([],[],'',linewidth=3,label='Vel_Earth = '+str(y_i)+' + ('+str(round(g_Earth/2,1))+')t^'+str(n)+' [m]')
-Vel_M,=ax4.plot([],[],'',linewidth=3,label='Vel_Moon = '+str(y_i)+' + ('+str(round(g_Moon/2,1))+')t^'+str(n)+' [m]')
-Vel_Mars,=ax4.plot([],[],'',linewidth=3,label='Vel_Mars = '+str(y_i)+' + ('+str(round(g_Mars/2,1))+')t^'+str(n)+' [m]')
+Vel_M,=ax4.plot([],[],'orangered',linewidth=3,label='Vel_Moon = '+str(y_i)+' + ('+str(round(g_Moon/2,1))+')t^'+str(n)+' [m]')
+Vel_Mars,=ax4.plot([],[],'gray',linewidth=3,label='Vel_Mars = '+str(y_i)+' + ('+str(round(g_Mars/2,1))+')t^'+str(n)+' [m]')
 plt.xlim(0,t_end)
 plt.ylim(y_Earth_Velocity[-1],0)
 plt.legend(loc=(0.6,0.7),fontsize='x-small')
@@ -168,8 +168,8 @@ plt.legend(loc=(0.6,0.7),fontsize='x-small')
 # ############### acceleration ###########
 ax5 = fig.add_subplot(gs[2,3],facecolor=(0.9,0.9,0.9))
 Acc_E,=ax5.plot([],[],'',linewidth=3,label='Acc_Earth = '+str(y_i)+' + ('+str(round(g_Earth/2,1))+')t^'+str(n)+' [m]')
-Acc_M,=ax5.plot([],[],'',linewidth=3,label='Acc_Moon = '+str(y_i)+' + ('+str(round(g_Moon/2,1))+')t^'+str(n)+' [m]')
-Acc_Mars,=ax5.plot([],[],'',linewidth=3,label='Acc_Mars = '+str(y_i)+' + ('+str(round(g_Mars/2,1))+')t^'+str(n)+' [m]')
+Acc_M,=ax5.plot([],[],'orangered',linewidth=3,label='Acc_Moon = '+str(y_i)+' + ('+str(round(g_Moon/2,1))+')t^'+str(n)+' [m]')
+Acc_Mars,=ax5.plot([],[],'gray',linewidth=3,label='Acc_Mars = '+str(y_i)+' + ('+str(round(g_Mars/2,1))+')t^'+str(n)+' [m]')
 plt.xlim(0,t_end)
 plt.ylim(y_Earth_Acceleration[-1]-2,0)
 plt.legend(loc=(0.6,0.7),fontsize='x-small')
