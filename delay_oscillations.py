@@ -21,7 +21,7 @@ train_blue = A1*np.sin(2*np.pi*f1*t)
 ### red train ###
 f2 = 0.125 # [Hz]
 A2 = -7 #Amplitude [m]
-train_red = A1*np.sin(2*np.pi*f2*t)
+train_red = A1*np.cos(2*np.pi*f2*t)
 
 ############ CARS #################
 y_i = 13
@@ -34,7 +34,14 @@ frame_amount=len(t)
 
 def update_plot(num):
 
-    return
+    X_blue.set_data(t[0:num],train_blue[0:num])
+    X_red.set_data(t[0:num],train_red[0:num])
+
+    block_blue.set_data([train_blue[num]-0.45,train_blue[num]+0.45],[3.5,3.5])
+    block_red.set_data([train_red[num]-0.45,train_red[num]+0.45],[1.5,1.5])
+
+
+    return X_red, X_blue, block_red, block_blue, 
 
 fig = plt.figure(figsize=(16,9),dpi=120,facecolor=(0.8,0.8,0.8))
 gs=gridspec.GridSpec(2,2)
@@ -75,10 +82,10 @@ ax1.xaxis.set_label_coords(0.5,0)
 ############ subplot 2 ##########################
 
 ax2 = fig.add_subplot(gs[:,1],facecolor=(0.9,0.9,0.9))
-bock_blue, = ax2.plot([],[],'-b',linewidth=28)
-bock_red, = ax2.plot([],[],'-r',linewidth=28)
-bock_green, = ax2.plot([],[],'-g',linewidth=24)
-bock_purple, = ax2.plot([],[],'purple',linewidth=24)
+block_blue, = ax2.plot([],[],'-b',linewidth=28)
+block_red, = ax2.plot([],[],'-r',linewidth=28)
+block_green, = ax2.plot([],[],'-g',linewidth=24)
+block_purple, = ax2.plot([],[],'purple',linewidth=24)
 
 #create danger zone
 danger_zone_1, = ax2.plot([3,4],[1,1],'-k',linewidth=3)
@@ -117,6 +124,10 @@ ax2.spines['left'].set_position("center")
 
 ax2.xaxis.set_label_coords(0.5,0)
 ax2.yaxis.set_label_coords(0,0.5)
+#delete 0 in the axis
+plt.xticks(np.concatenate([np.arange(-7-1,0,1),np.arange(1,7+2,1)]),size=10)
+plt.yticks(np.concatenate([np.arange(-2-1,0,1),np.arange(1,y_i+2,1)]),size=10)
+
 
 
 plane_ani = animation.FuncAnimation(fig,update_plot,frames=frame_amount, interval=20, repeat=True, blit=True)
