@@ -47,10 +47,17 @@ def update_plot(num):
         block_green.set_data([3.5, 3.5],[y_i-0.5,y_i+0.5])
         Y_green2.set_data(t[0:num],y_i)
 
+    if t[num]>=6:    
+        block_purple.set_data([-3.5, -3.5],[car_purple[num]-0.5,car_purple[num]+0.5])
+        Y_purple.set_data(t[int(6/dt):num],car_purple[int(6/dt):num])
+    else:
+        block_purple.set_data([-3.5, -3.5],[y_i-0.5,y_i+0.5])
+        Y_purple2.set_data(t[0:num],y_i)
+
     # block_purple.set_data([1.5, 1.5],[car_purple[num]-0.5,car_purple[num]+0.5])
 
 
-    return X_red, X_blue, block_red, block_blue, block_green,Y_green, Y_green2,
+    return X_red, X_blue, block_red, block_blue, block_purple, Y_purple, Y_purple2, block_green,Y_green, Y_green2, 
 
 
 fig = plt.figure(figsize=(16,9),dpi=120,facecolor=(0.8,0.8,0.8))
