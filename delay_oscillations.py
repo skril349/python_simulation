@@ -40,8 +40,18 @@ def update_plot(num):
     block_blue.set_data([train_blue[num]-0.45,train_blue[num]+0.45],[3.5,3.5])
     block_red.set_data([train_red[num]-0.45,train_red[num]+0.45],[1.5,1.5])
 
+    if t[num]>=2:    
+        block_green.set_data([3.5, 3.5],[car_green[num]-0.5,car_green[num]+0.5])
+        Y_green.set_data(t[int(2/dt):num],car_green[int(2/dt):num])
+    else:
+        block_green.set_data([3.5, 3.5],[y_i-0.5,y_i+0.5])
+        Y_green2.set_data(t[0:num],y_i)
 
-    return X_red, X_blue, block_red, block_blue, 
+    # block_purple.set_data([1.5, 1.5],[car_purple[num]-0.5,car_purple[num]+0.5])
+
+
+    return X_red, X_blue, block_red, block_blue, block_green,Y_green, Y_green2,
+
 
 fig = plt.figure(figsize=(16,9),dpi=120,facecolor=(0.8,0.8,0.8))
 gs=gridspec.GridSpec(2,2)
